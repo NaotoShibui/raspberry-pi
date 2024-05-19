@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import http.client
+import socket
 import os
 
 SERVER_HOST = os.getenv('SERVER_HOST') 
@@ -18,15 +18,12 @@ def button_callback(channel):
         send_message()
 
 def send_message():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        connection = http.client.HTTPConnection(SERVER_HOST, SERVER_PORT)
-        headers = {'Content-Type': 'text/plain'}
-        connection.request('GET', '/', headers=headers)
-        response = connection.getresponse()
-        print(response.status, response.reason)
-        print(response.read().decode())
+        s.sendto('switch ON'.encode(), (SERVER_HOST, SERVER_PORT))
+        
     finally:
-        connection.close()
+        s.close()
 
 GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=button_callback, bouncetime=100)
 
