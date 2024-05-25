@@ -4,13 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --build",
+    "dev": "tsx ./src/index.ts",
+    "start": "sudo $(which node) ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "tsx": "^4.10.5",
+    "tsx": "^4.11.0",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "net": "^1.0.2",
+    "raspi": "^6.0.1",
+    "raspi-gpio": "^6.2.2",
+    "undici": "^6.18.1"
   }
 }
