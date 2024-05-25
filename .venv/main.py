@@ -19,12 +19,15 @@ def button_callback(channel):
 
 def send_message():
     try:
+        print('1')
         connection = http.client.HTTPConnection(SERVER_HOST, SERVER_PORT)
+        print('2')
         headers = {'Content-Type': 'text/plain'}
+        print('3')
         connection.request('GET', '/', headers=headers)
-        response = connection.getresponse()
-        print(response.status, response.reason)
-        print(response.read().decode())
+        print('4')
+    except e:
+        print(e)
     finally:
         connection.close()
 
